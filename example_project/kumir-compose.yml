@@ -1,0 +1,14 @@
+project:
+  depends:
+    k-collections: latest
+  distribute: []
+  filename_format: '%s.kum'
+  library_location: lib
+  lookup:
+  - lib
+  name: Test project
+settings:
+  sdk:
+    compiler: C:\Program Files (x86)\Kumir-2.1.0-rc11\bin\kumir2-bc.exe
+    debug: C:\Program Files (x86)\Kumir-2.1.0-rc11\bin\kumir2-xrun.exe
+    release: C:\Program Files (x86)\Kumir-2.1.0-rc11\bin\kumir2-xrun.exe

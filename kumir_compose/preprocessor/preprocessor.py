@@ -32,7 +32,8 @@ class Preprocessor:
         self._filename = filename
         self._source = source
         self._macro_table: dict[str, Sequence[Token]] = {}
-        self._lookup_paths = lookup_paths
+        self._lookup_paths = set(lookup_paths)
+        self._lookup_paths.add("")
         self._encoding = encoding
         self._condition_stack = []
         self._included = set()

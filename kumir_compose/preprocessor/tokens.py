@@ -56,7 +56,7 @@ KEYWORDS: Final = frozenset((
 ))
 
 PUNCTUATION_CHARS: Final = frozenset(
-    "()[]+-*/,<>:="
+    "()[]+-*/,<>:=;"
 )
 
 DIRECTIVES: Final = MappingProxyType({

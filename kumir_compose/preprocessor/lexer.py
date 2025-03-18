@@ -115,7 +115,7 @@ class Lexer:
                     self._add_token(TokenType.PUNCTUATION)
                 elif ch.isnumeric() or ch == ".":
                     self._scan_number()
-                elif ch.isalpha():
+                elif ch in VALID_ID_CHARS:
                     self._scan_identifier()
                 else:
                     self._error(
