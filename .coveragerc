@@ -1,0 +1,18 @@
+[run]
+plugins = covdefaults
+
+[report]
+show_missing = True
+skip_covered = True
+fail_under = 100
+exclude_lines =
+    # a more strict default pragma
+    \# pragma: no cover\b
+
+    # allow defensive code
+    ^\s*raise AssertionError\b
+    ^\s*raise NotImplementedError\b
+    ^\s*return NotImplemented\b
+    ^\s*raise$
+
+    ^\s*assert_never.*\b

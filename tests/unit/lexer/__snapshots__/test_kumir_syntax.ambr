@@ -1,0 +1,173 @@
+# serializer version: 1
+# name: test_basic_kumir_syntax
+  '''
+  TokenType.KEYWORD:аргрез:1:6
+  TokenType.SPACE: :1:7
+  TokenType.KEYWORD:знач:1:11
+  TokenType.SPACE: :1:12
+  TokenType.KEYWORD:цел:1:15
+  TokenType.SPACE: :1:16
+  TokenType.KEYWORD:вещ:1:19
+  TokenType.SPACE: :1:20
+  TokenType.KEYWORD:лог:1:23
+  TokenType.SPACE: :1:24
+  TokenType.KEYWORD:сим:1:27
+  TokenType.SPACE: :1:28
+  TokenType.KEYWORD:лит:1:31
+  TokenType.SPACE: :1:32
+  TokenType.ID:таб:1:35
+  TokenType.NEWLINE:
+  :1:36
+  TokenType.KEYWORD:целтаб:2:6
+  TokenType.SPACE: :2:7
+  TokenType.KEYWORD:вещтаб:2:13
+  TokenType.SPACE: :2:14
+  TokenType.KEYWORD:логтаб:2:20
+  TokenType.SPACE: :2:21
+  TokenType.KEYWORD:литтаб:2:27
+  TokenType.SPACE: :2:28
+  TokenType.KEYWORD:и:2:29
+  TokenType.SPACE: :2:30
+  TokenType.KEYWORD:или:2:33
+  TokenType.SPACE: :2:34
+  TokenType.ID:не:2:36
+  TokenType.NEWLINE:
+  :2:37
+  TokenType.KEYWORD:да:3:2
+  TokenType.SPACE: :3:3
+  TokenType.KEYWORD:нет:3:6
+  TokenType.SPACE: :3:7
+  TokenType.KEYWORD:утв:3:10
+  TokenType.SPACE: :3:11
+  TokenType.KEYWORD:выход:3:16
+  TokenType.SPACE: :3:17
+  TokenType.KEYWORD:ввод:3:21
+  TokenType.SPACE: :3:22
+  TokenType.KEYWORD:вывод:3:27
+  TokenType.SPACE: :3:28
+  TokenType.KEYWORD:нс:3:30
+  TokenType.SPACE: :3:31
+  TokenType.ID:если:3:35
+  TokenType.NEWLINE:
+  :3:36
+  TokenType.KEYWORD:то:4:2
+  TokenType.SPACE: :4:3
+  TokenType.KEYWORD:иначе:4:8
+  TokenType.SPACE: :4:9
+  TokenType.KEYWORD:все:4:12
+  TokenType.SPACE: :4:13
+  TokenType.KEYWORD:выбор:4:18
+  TokenType.SPACE: :4:19
+  TokenType.KEYWORD:при:4:22
+  TokenType.SPACE: :4:23
+  TokenType.KEYWORD:нц:4:25
+  TokenType.SPACE: :4:26
+  TokenType.KEYWORD:кц:4:28
+  TokenType.SPACE: :4:29
+  TokenType.ID:кц_при:4:35
+  TokenType.NEWLINE:
+  :4:36
+  TokenType.KEYWORD:раз:5:3
+  TokenType.SPACE: :5:4
+  TokenType.KEYWORD:пока:5:8
+  TokenType.SPACE: :5:9
+  TokenType.KEYWORD:для:5:12
+  TokenType.SPACE: :5:13
+  TokenType.KEYWORD:от:5:15
+  TokenType.SPACE: :5:16
+  TokenType.KEYWORD:до:5:18
+  TokenType.SPACE: :5:19
+  TokenType.KEYWORD:шаг:5:22
+  TokenType.SPACE: :5:23
+  TokenType.KEYWORD:алг:5:26
+  TokenType.SPACE: :5:27
+  TokenType.KEYWORD:нач:5:30
+  TokenType.SPACE: :5:31
+  TokenType.ID:кон:5:34
+  TokenType.NEWLINE:
+  :5:35
+  TokenType.KEYWORD:исп:6:3
+  TokenType.SPACE: :6:4
+  TokenType.KEYWORD:кон_исп:6:11
+  TokenType.SPACE: :6:12
+  TokenType.KEYWORD:дано:6:16
+  TokenType.SPACE: :6:17
+  TokenType.KEYWORD:надо:6:21
+  TokenType.SPACE: :6:22
+  TokenType.KEYWORD:арг:6:25
+  TokenType.SPACE: :6:26
+  TokenType.ID:рез:6:29
+  TokenType.NEWLINE:
+  :6:30
+  TokenType.PUNCTUATION:(:7:1
+  TokenType.PUNCTUATION:):7:2
+  TokenType.PUNCTUATION:[:7:3
+  TokenType.PUNCTUATION:]:7:4
+  TokenType.PUNCTUATION:+:7:5
+  TokenType.PUNCTUATION:-:7:6
+  TokenType.PUNCTUATION:*:7:7
+  TokenType.PUNCTUATION:/:7:8
+  TokenType.PUNCTUATION:,:7:9
+  TokenType.PUNCTUATION:<:7:10
+  TokenType.PUNCTUATION:>:7:11
+  TokenType.PUNCTUATION:::7:12
+  TokenType.PUNCTUATION:=:7:13
+  TokenType.NEWLINE:
+  :7:14
+  TokenType.KEYWORD:вещ:8:3
+  TokenType.SPACE: :8:4
+  TokenType.ID:number:8:11
+  TokenType.SPACE: :8:12
+  TokenType.PUNCTUATION:=:8:13
+  TokenType.SPACE: :8:14
+  TokenType.NUMBER:132.32332:8:23
+  TokenType.NEWLINE:
+  :8:24
+  TokenType.KEYWORD:цел:9:3
+  TokenType.SPACE: :9:4
+  TokenType.ID:n:9:6
+  TokenType.SPACE: :9:7
+  TokenType.PUNCTUATION:=:9:8
+  TokenType.SPACE: :9:9
+  TokenType.NUMBER:123:9:12
+  TokenType.NEWLINE:
+  :9:13
+  TokenType.KEYWORD:лит:10:3
+  TokenType.SPACE: :10:4
+  TokenType.ID:имя:10:8
+  TokenType.SPACE: :10:9
+  TokenType.PUNCTUATION:=:10:10
+  TokenType.SPACE: :10:11
+  TokenType.STRING:"это двойные кавычки":10:32
+  TokenType.NEWLINE:
+  :10:33
+  TokenType.KEYWORD:лит:11:3
+  TokenType.SPACE: :11:4
+  TokenType.ID:имя с пробелом_ да_ так тоже можно:11:39
+  TokenType.SPACE: :11:40
+  TokenType.PUNCTUATION:=:11:41
+  TokenType.SPACE: :11:42
+  TokenType.STRING:'это одинарные кавычки':11:65
+  TokenType.NEWLINE:
+  :11:66
+  TokenType.COMMENT:| комментарий:12:13
+  TokenType.NEWLINE:
+  :12:14
+  TokenType.COMMENT:| еще комментарий:13:17
+  TokenType.NEWLINE:
+  :13:18
+  TokenType.KEYWORD:лог:14:3
+  TokenType.SPACE: :14:4
+  TokenType.ID:ехать на дачу:14:18
+  TokenType.SPACE: :14:19
+  TokenType.PUNCTUATION:=:14:20
+  TokenType.SPACE: :14:21
+  TokenType.ID:сегодня солнечно:14:39
+  TokenType.SPACE: :14:424
+  TokenType.KEYWORD:и:14:39
+  TokenType.SPACE: :14:40
+  TokenType.ID:завтра солнечно:14:55
+  TokenType.NEWLINE:
+  :14:56
+  '''
+# ---

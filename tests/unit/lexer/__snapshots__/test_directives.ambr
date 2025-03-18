@@ -1,0 +1,49 @@
+# serializer version: 1
+# name: test_directives_parsed
+  '''
+  TokenType.INCLUDE:|| включить krpc:1:16
+  TokenType.NEWLINE:
+  :1:17
+  TokenType.DEFINE:|| задать ОТЛАДКА:2:17
+  TokenType.NEWLINE:
+  :2:18
+  TokenType.DEFINE:|| задать ПРОДАКШН:3:18
+  TokenType.NEWLINE:
+  :3:19
+  TokenType.IFDEF:|| еслизад ОТЛАДКА:4:18
+  TokenType.NEWLINE:
+  :4:19
+  TokenType.KEYWORD:вывод:5:5
+  TokenType.SPACE: :5:6
+  TokenType.STRING:"Привет, КуМир-Композитор!":5:33
+  TokenType.PUNCTUATION:,:5:34
+  TokenType.SPACE: :5:35
+  TokenType.ID:нс:5:37
+  TokenType.NEWLINE:
+  :5:38
+  TokenType.ENDIF:|| конецесли:6:12
+  TokenType.NEWLINE:
+  :6:13
+  TokenType.IFNDEF:|| еслинезад ПРОДАКШН:7:21
+  TokenType.NEWLINE:
+  :7:22
+  TokenType.KEYWORD:лит:8:3
+  TokenType.SPACE: :8:4
+  TokenType.ID:СЕКРЕТНЫЙ КЛЮЧ:8:19
+  TokenType.SPACE: :8:20
+  TokenType.PUNCTUATION:=:8:21
+  TokenType.SPACE: :8:22
+  TokenType.STRING:"12345678":8:32
+  TokenType.NEWLINE:
+  :8:33
+  TokenType.ENDIF:|| конецесли:9:12
+  TokenType.NEWLINE:
+  :9:13
+  TokenType.UNDEF:|| забыть ОТЛАДКА:10:17
+  TokenType.NEWLINE:
+  :10:18
+  TokenType.UNDEF:|| забыть ПРОДАКШН:11:18
+  TokenType.NEWLINE:
+  :11:19
+  '''
+# ---

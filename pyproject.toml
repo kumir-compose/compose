@@ -1,0 +1,29 @@
+[project]
+name = "kumir-compose"
+version = "0.1.0"
+description = "Kumir preprocessing, package management and debugging tool"
+authors = [
+    {name = "Tapeline",email = "yt.redstone.mail@gmail.com"}
+]
+license = {text = "GNU GPL v3.0"}
+readme = "README.md"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "attrs (>=25.3.0,<26.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
+syrupy = "^4.9.0"
+import-linter = "^2.3"
+wemake-python-styleguide = "^1.0.0"
+ruff = "^0.11.0"
+covdefaults = "^2.3.0"
+mypy = "^1.15.0"
+
