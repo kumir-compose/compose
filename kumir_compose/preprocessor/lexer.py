@@ -1,14 +1,14 @@
 from collections.abc import Sequence
+from pathlib import Path
 from typing import cast
 
 from kumir_compose.preprocessor.exceptions import (
-    LexerException,
+    PositionedException,
     UnexpectedCharacterException,
     UnknownDirectiveException,
 )
 from kumir_compose.preprocessor.tokens import (
     DIRECTIVES,
-    DIRECTIVES_WITH_ARGS,
     KEYWORDS,
     PUNCTUATION_CHARS,
     VALID_ID_CHARS,
@@ -75,15 +75,12 @@ class Lexer:
     def _previous(self) -> char:
         return self._code[self._pos - 1]
 
-    def _error(self, exc_type: type[LexerException], *args, **kwargs) -> None:
+    def _error(self, exc_type: type[PositionedException], *args, **kwargs) -> None:
         kwargs["filename"] = self._filename
         kwargs["source"] = self._code
         kwargs["line"] = self._line
         kwargs["char"] = self._char
-        raise exc_type(
-            *args,
-            **kwargs,
-        )
+        raise exc_type(*args, **kwargs)
 
     def _require(self, target: char) -> char:
         ch = self._match(target)
@@ -147,14 +144,7 @@ class Lexer:
                 got=directive_name
             )
         directive_type = DIRECTIVES[directive_name]
-        if directive_name not in DIRECTIVES_WITH_ARGS:
-            self._add_token(directive_type)
-            return
-        self._require(" ")
-        directive_contents = ""
-        while self._peek and self._peek not in "\r\n":
-            directive_contents += self._consume()
-        self._add_token(directive_type, directive_contents)
+        self._add_token(directive_type)
 
     def _scan_comment(self) -> None:
         while self._peek and self._peek not in "\r\n":
@@ -201,8 +191,15 @@ class Lexer:
 
 def _count_trailing_whitespaces(text: str) -> int:  # pragma: no cover
     count = len(text)
-    for pos, ch in enumerate(range(len(text))):
-        if ch != " ":
+    for pos in range(len(text)):  # noqa: WPS518
+        if text[-(pos + 1)] != " ":
             count = pos
             break
     return count
+
+
+def scan_file(filename: str, encoding: str | None = None) -> Sequence[Token]:
+    """Scan file to tokens."""
+    src = Path(filename).read_text(encoding=encoding)
+    lexer = Lexer(filename, src)
+    return lexer.scan()

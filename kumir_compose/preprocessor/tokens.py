@@ -76,5 +76,5 @@ DIRECTIVES_WITH_ARGS: Final = frozenset((
 ))
 
 VALID_ID_CHARS: Final = frozenset(
-    char_range("AZ", "az", "АЯ", "ая", "_", " ")
+    char_range("AZ", "az", "АЯ", "ая", "_", " ", "09")
 )

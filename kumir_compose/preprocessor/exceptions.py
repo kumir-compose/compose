@@ -1,7 +1,7 @@
-from kumir_compose.preprocessor.tokens import DIRECTIVES
+from kumir_compose.preprocessor.tokens import DIRECTIVES, Token, TokenType
 
 
-class LexerException(Exception):
+class PositionedException(Exception):
     """Base class for lexer exceptions."""
 
     def __init__(
@@ -37,7 +37,7 @@ class LexerException(Exception):
         return self.formatted_message
 
 
-class UnexpectedCharacterException(LexerException):
+class UnexpectedCharacterException(PositionedException):
     """Raised when encountered unexpected character."""
 
     def __init__(
@@ -60,7 +60,7 @@ class UnexpectedCharacterException(LexerException):
         )
 
 
-class UnknownDirectiveException(LexerException):
+class UnknownDirectiveException(PositionedException):
     """Raised when encountered unexpected directive."""
 
     def __init__(
@@ -81,4 +81,72 @@ class UnknownDirectiveException(LexerException):
             source,
             line,
             char,
+        )
+
+
+class ParserException(PositionedException):
+    """Base class for parser exceptinons."""
+
+    def __init__(
+            self,
+            message: str,
+            filename: str,
+            source: str,
+            token: Token
+    ) -> None:
+        """Create exception and transfer location info from token."""
+        super().__init__(message, filename, source, token.line, token.char)
+        self.token = token
+
+
+class UnexpectedTokenException(ParserException):
+    """Raised when an unexpected token is encountered."""
+
+    default_message = "Expected {expected_str}, but got {got_str}"
+
+    def __init__(
+            self,
+            got: Token | None,
+            expected: TokenType | str,
+            *,
+            filename: str,
+            source: str,
+            token: Token,
+            message: str | None
+    ) -> None:
+        super().__init__(
+            (message or self.default_message).format(
+                expected=(
+                    expected if isinstance(expected, str)
+                    else expected.name
+                ),
+                got="none" if got is None else got.lexeme
+            ),
+            filename,
+            source,
+            token
+        )
+
+
+class IncludeFileNotFoundException(ParserException):
+    """Raised when tried to include file that does not exist."""
+
+    default_message = "Tried to include {incl_file}, but it does not exist"
+
+    def __init__(
+            self,
+            incl_file: str,
+            *,
+            filename: str,
+            source: str,
+            token: Token,
+            message: str | None = None
+    ) -> None:
+        super().__init__(
+            (message or self.default_message).format(
+                incl_file=incl_file
+            ),
+            filename,
+            source,
+            token
         )

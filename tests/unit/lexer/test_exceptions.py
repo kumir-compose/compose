@@ -15,10 +15,6 @@ from kumir_compose.preprocessor.lexer import Lexer
             UnknownDirectiveException
         ),
         (
-            "|| задать,",
-            UnexpectedCharacterException
-        ),
-        (
             "^",
             UnexpectedCharacterException
         ),
