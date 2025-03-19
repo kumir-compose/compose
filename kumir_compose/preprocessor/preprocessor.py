@@ -177,6 +177,7 @@ class Preprocessor:
                 return Path(root, filename)
             if Path(root, f"{filename}.kum").exists():
                 return Path(root, f"{filename}.kum")
+        return None
 
     def _start_conditional(self, *, expected: bool) -> None:
         self._consume_spaces()

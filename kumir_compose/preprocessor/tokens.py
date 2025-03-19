@@ -66,6 +66,12 @@ DIRECTIVES: Final = MappingProxyType({
     "задать": TokenType.DEFINE,
     "конецесли": TokenType.ENDIF,
     "забыть": TokenType.UNDEF,
+    "include": TokenType.INCLUDE,
+    "ifdef": TokenType.IFDEF,
+    "ifndef": TokenType.IFNDEF,
+    "define": TokenType.DEFINE,
+    "endif": TokenType.ENDIF,
+    "undef": TokenType.UNDEF,
 })
 DIRECTIVES_WITH_ARGS: Final = frozenset((
     "включить",
@@ -73,6 +79,11 @@ DIRECTIVES_WITH_ARGS: Final = frozenset((
     "еслинезад",
     "задать",
     "забыть",
+    "include",
+    "ifdef",
+    "ifndef",
+    "define",
+    "undef",
 ))
 
 VALID_ID_CHARS: Final = frozenset(

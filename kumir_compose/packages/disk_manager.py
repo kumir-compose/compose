@@ -1,8 +1,6 @@
 import shutil
 from pathlib import Path
 
-from kumir_compose.packages.discover import WebPackage
-
 
 class DiskPackageManager:
     def __init__(self, root: str) -> None:

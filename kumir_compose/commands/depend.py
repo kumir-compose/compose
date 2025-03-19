@@ -1,8 +1,10 @@
 from kumir_compose.commands.common import err_exit
 from kumir_compose.config.config_file import ConfigModel
 from kumir_compose.packages.exceptions import (
-    FileNotFoundException, MalformedRemoteManifestException,
-    NotFoundException, PackageAlreadyInstalledException,
+    FileNotFoundException,
+    MalformedRemoteManifestException,
+    NotFoundException,
+    PackageAlreadyInstalledException,
 )
 from kumir_compose.packages.package_manager import PackageManager
 
@@ -38,6 +40,7 @@ def depend(
         version: str = "latest",
         update: bool = False
 ) -> None:
+    """Command impl."""
     config.project.depends[name] = version
     manager = PackageManager(config.project.library_location)
     if update:
@@ -51,6 +54,7 @@ def undepend(
         config: ConfigModel,
         name: str
 ) -> None:
+    """Command impl."""
     if name in config.project.depends:
         config.project.depends.pop(name)
     manager = PackageManager(config.project.library_location)
@@ -59,6 +63,7 @@ def undepend(
 
 @handle_errors
 def install(config: ConfigModel, refresh: bool) -> None:
+    """Command impl."""
     manager = PackageManager(config.project.library_location)
     if refresh:
         manager.clean_packages()

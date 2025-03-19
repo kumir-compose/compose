@@ -12,6 +12,7 @@ def run(
         name: str,
         encoding: str
 ) -> None:
+    """Command impl."""
     if config.settings.sdk.release is None:
         err_exit("Release SDK VM executable not set")
     if config.settings.sdk.compiler is None:
@@ -22,13 +23,13 @@ def run(
     subprocess.run(
         [config.settings.sdk.compiler, output_name],
         stdout=sys.stdout,
-        stderr=sys.stderr
+        stderr=sys.stderr, check=False
     )
     proc = subprocess.run(
         [config.settings.sdk.release, compiled_name],
         stdout=sys.stdout,
         stderr=sys.stderr,
-        stdin=sys.stdin,
+        stdin=sys.stdin, check=False,
     )
     os.remove(output_name)
     os.remove(compiled_name)

@@ -1,12 +1,18 @@
 import logging
 import sys
+from pathlib import Path
 
 import click
 
+from kumir_compose.commands.common import err_exit
 from kumir_compose.commands.compose import compose
 from kumir_compose.commands.depend import depend, install, undepend
+from kumir_compose.commands.init import init
 from kumir_compose.commands.run import run
-from kumir_compose.config.config_file import load_config, save_config
+from kumir_compose.config.config_file import (
+    load_config,
+    save_beautify_config,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +38,7 @@ def kumir_compose(
         output: str,
 ) -> None:
     """Compose .kum file."""
+    _guard_config_exists()
     config = load_config(encoding)
     compose(config, filename, encoding, output)
 
@@ -61,9 +68,10 @@ def kumir_compose_group():
 )
 def depend_command(name: str, version: str, update: bool, encoding: str):
     """Install or update a dependency."""
+    _guard_config_exists()
     config = load_config(encoding)
     depend(config, name, version, update)
-    save_config(config, encoding)
+    save_beautify_config(config, encoding)
 
 
 @kumir_compose_group.command(name="undepend")
@@ -75,9 +83,10 @@ def depend_command(name: str, version: str, update: bool, encoding: str):
 )
 def undepend_command(name: str, encoding: str):
     """Remove a dependency."""
+    _guard_config_exists()
     config = load_config(encoding)
     undepend(config, name)
-    save_config(config, encoding)
+    save_beautify_config(config, encoding)
 
 
 @kumir_compose_group.command(name="install")
@@ -94,6 +103,7 @@ def undepend_command(name: str, encoding: str):
 )
 def install_command(refresh: bool, encoding: str):
     """Install all dependencies."""
+    _guard_config_exists()
     config = load_config(encoding)
     install(config, refresh)
 
@@ -105,10 +115,17 @@ def install_command(refresh: bool, encoding: str):
     default="UTF-8",
     help="What encoding to use when reading config"
 )
-def install_command(filename: str, encoding: str):
+def run_command(filename: str, encoding: str):
     """Preprocess, compile and run Kumir2 file."""
+    _guard_config_exists()
     config = load_config(encoding)
     run(config, filename, encoding)
+
+
+@kumir_compose_group.command(name="init")
+def init_command():
+    """Init Kumir-Compose project."""
+    init()
 
 
 _SUBCOMMANDS = frozenset((
@@ -117,6 +134,7 @@ _SUBCOMMANDS = frozenset((
     "install",
     "run",
     "debug",
+    "init"
 ))
 
 
@@ -126,3 +144,11 @@ def main():
         kumir_compose()
     else:
         kumir_compose_group()
+
+
+def _guard_config_exists():
+    if not Path("kumir-compose.yml").exists():
+        err_exit(
+            "kumir-compose.yml not found in cwd.\n"
+            "Run `kumir-compose init` to create one"
+        )

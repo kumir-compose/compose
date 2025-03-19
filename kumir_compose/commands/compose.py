@@ -13,6 +13,7 @@ def compose(
         encoding: str | None,
         output_name: str | None = None
 ) -> None:
+    """Command impl."""
     file = Path(filename)
     if not output_name:
         output_name = config.project.filename_format % (filename,)

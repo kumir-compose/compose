@@ -3,14 +3,12 @@ from dataclasses import dataclass
 import pydantic
 import requests
 import yaml
-from github import Github, GithubException, UnknownObjectException
-from github.Branch import Branch
-from github.Commit import Commit
-from github.Repository import Repository
+from github import Github
 
 from kumir_compose.config.config_file import ConfigModel, ProjectModel
 from kumir_compose.packages.exceptions import (
-    FileNotFoundException, MalformedRemoteManifestException,
+    FileNotFoundException,
+    MalformedRemoteManifestException,
     NotFoundException,
 )
 

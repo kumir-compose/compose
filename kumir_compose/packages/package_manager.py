@@ -1,6 +1,8 @@
-import logging
 import os
 from pathlib import Path
+
+import click
+from alive_progress import alive_it
 
 from kumir_compose.packages.discover import Discoverer, WebPackage
 from kumir_compose.packages.disk_manager import DiskPackageManager
@@ -24,23 +26,23 @@ class PackageManager:
 
     def remove_package(self, name: str) -> None:
         self.disk_mgr.clean_package(name)
-        logging.info("Removed package")
+        click.termui.echo("Removed package")
 
     def add_package(self, name: str, version: str) -> None:
         if name.split("/")[-1] in self.list_packages():
             raise PackageAlreadyInstalledException(name)
-        logging.info("Resolving package...")
+        click.termui.echo("Resolving package...")
         package = WebPackage(name, version)
         package = self.discoverer.get_package(package)
-        logging.info("Resolving dependencies...")
+        click.termui.echo("Resolving dependencies...")
         dependencies = self.resolver.resolve_dependencies(package)
-        logging.info("Downloading dependencies...")
-        for dependency in dependencies:
+        click.termui.echo("Downloading dependencies...")
+        for dependency in alive_it(dependencies):
             if dependency.name.split("/")[-1] not in self.list_packages():
                 self.downloader.download_package(dependency)
-        logging.info("Downloading package...")
+        click.termui.echo("Downloading package...")
         self.downloader.download_package(package)
-        logging.info("Added")
+        click.termui.echo(click.style("Added.", fg="green"), color=True)
 
     def update_package(self, name: str, version: str) -> None:
         self.remove_package(name)
