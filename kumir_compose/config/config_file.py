@@ -16,10 +16,13 @@ class ProjectModel(BaseModel):
     lookup: list[str] = [_DEFAULT_LIB_LOC]
     filename_format: str = _DEFAULT_FILENAME_FMT
     distribute: list[str] = []
+    kpsi_support: bool = False
 
     @property
     def beautiful_str(self) -> str:
         res = f"name: {self.name}"
+        if self.kpsi_support:
+            res += "\nkpsi_support: true"
         if self.depends:
             res += "\ndepends:"
             for dep_name, dep_version in self.depends.items():
@@ -65,7 +68,9 @@ class ConfigModel(BaseModel):
     @property
     def beautiful_str(self) -> str:
         project = textwrap.indent(self.project.beautiful_str, "  ")
-        settings = textwrap.indent(self.settings.beautiful_str, "  ")
+        settings = ""
+        if self.settings:
+            settings = textwrap.indent(self.settings.beautiful_str, "  ")
         return (
             f"project:\n"
             f"{project}\n\n\n"

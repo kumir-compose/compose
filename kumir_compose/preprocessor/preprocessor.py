@@ -72,7 +72,7 @@ class Preprocessor:
         kwargs["source"] = self._source
         kwargs["filename"] = self._filename
         kwargs["token"] = self._tokens[
-            min(len(self._tokens) - 1, max(self._pos - offset, 0))
+            min(len(self._tokens) - 1, max(self._pos + offset, 0))
         ]
         raise exc_type(*args, **kwargs)
 
@@ -155,7 +155,7 @@ class Preprocessor:
             self._error(
                 IncludeFileNotFoundException,
                 incl_file=path_tok.value,
-                offset=-1
+                offset=-2
             )
         abs_path = str(found_path.absolute())
         if abs_path in self._included:

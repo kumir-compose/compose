@@ -5,14 +5,17 @@ from pathlib import Path
 import click
 
 from kumir_compose.commands.common import err_exit
+from kumir_compose.commands.compile import compile_
 from kumir_compose.commands.compose import compose
 from kumir_compose.commands.depend import depend, install, undepend
 from kumir_compose.commands.init import init
 from kumir_compose.commands.run import run
+from kumir_compose.commands.web import web
 from kumir_compose.config.config_file import (
     load_config,
     save_beautify_config,
 )
+from kumir_compose.web import config_file as web_config
 
 logging.basicConfig(
     level=logging.INFO,
@@ -128,13 +131,55 @@ def init_command():
     init()
 
 
+@kumir_compose_group.command(name="compile")
+@click.argument("filename")
+@click.option(
+    "--encoding", "-e",
+    default="UTF-8",
+    help="What encoding to use when reading config"
+)
+@click.option(
+    "--output", "-o",
+    default=None,
+    help="Name of output file"
+)
+def compile_command(filename: str, encoding: str, output: str):
+    """Preprocess and compile Kumir2 file."""
+    _guard_config_exists()
+    config = load_config(encoding)
+    compile_(config, filename, encoding, output)
+
+
+@kumir_compose_group.command(name="web")
+@click.option(
+    "--bind", "-b",
+    default="0.0.0.0:8000",
+    help="IP:port to bind to"
+)
+@click.option(
+    "--encoding", "-e",
+    default="UTF-8",
+    help="What encoding to use when reading config"
+)
+def web_command(encoding: str, bind: str):
+    """Run web server."""
+    _guard_config_exists()
+    _guard_web_config_exists()
+    config = load_config(encoding)
+    web_conf = web_config.load_config(encoding)
+    bind_addr, bind_port = bind.split(":", maxsplit=1)
+    web(config, web_conf, encoding, (bind_addr, int(bind_port)))
+
+
 _SUBCOMMANDS = frozenset((
     "depend",
     "undepend",
     "install",
     "run",
     "debug",
-    "init"
+    "init",
+    "compile",
+    "web"
 ))
 
 
@@ -151,4 +196,11 @@ def _guard_config_exists():
         err_exit(
             "kumir-compose.yml not found in cwd.\n"
             "Run `kumir-compose init` to create one"
+        )
+
+
+def _guard_web_config_exists():
+    if not Path("kumir-compose-web.yml").exists():
+        err_exit(
+            "kumir-compose-web.yml not found in cwd."
         )
