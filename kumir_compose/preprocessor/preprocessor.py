@@ -130,13 +130,23 @@ class Preprocessor:
         self._consume_spaces()
         macro_name = self._require(TokenType.ID)
         self._consume_spaces()
-        macro_value = self._next()
-        if macro_value.type == TokenType.NEWLINE:
+        if self._peek == TokenType.NEWLINE:
+            self._match(TokenType.NEWLINE)
             self._macro_table[macro_name.value] = []
             return
-        macro_values = [macro_value]
-        while self._peek and self._peek.type != TokenType.NEWLINE:
-            macro_values.append(self._next())
+        esc = False
+        macro_values = []
+        while self._peek:
+            if self._peek.type == TokenType.NEWLINE:
+                if esc:
+                    esc = False
+                else:
+                    break
+            if self._peek.lexeme == "\\":
+                esc = True
+                self._next()
+            else:
+                macro_values.append(self._next())
         self._macro_table[macro_name.value] = macro_values
 
     def _undef_macro(self) -> None:

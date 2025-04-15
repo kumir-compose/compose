@@ -147,7 +147,7 @@ class Lexer:
         self._add_token(directive_type)
 
     def _scan_comment(self) -> None:
-        while self._peek and self._peek not in "\r\n":
+        while self._peek and self._peek not in "\r\n\\":
             self._consume()
         self._add_token(TokenType.COMMENT)
 
