@@ -102,7 +102,7 @@ class ParserException(PositionedException):
 class UnexpectedTokenException(ParserException):
     """Raised when an unexpected token is encountered."""
 
-    default_message = "Expected {expected_str}, but got {got_str}"
+    default_message = "Expected {expected}, but got {got}"
 
     def __init__(
             self,

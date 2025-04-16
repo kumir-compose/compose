@@ -16,48 +16,87 @@
   TokenType.ID:ПРОДАКШН:3:18
   TokenType.NEWLINE:
   :3:19
-  TokenType.IFDEF:|| еслизад:4:10
-  TokenType.SPACE: :4:11
-  TokenType.ID:ОТЛАДКА:4:18
+  TokenType.DEFINE:|| задать:4:9
+  TokenType.SPACE: :4:10
+  TokenType.ID:НАПЕЧАТАТЬ:4:20
+  TokenType.PUNCTUATION:(:4:21
+  TokenType.DEF_ARG:$a$:4:24
+  TokenType.PUNCTUATION:,:4:25
+  TokenType.SPACE: :4:26
+  TokenType.DEF_ARG:$b$:4:29
+  TokenType.PUNCTUATION:,:4:30
+  TokenType.SPACE: :4:31
+  TokenType.DEF_ARG:$c$:4:34
+  TokenType.PUNCTUATION:):4:35
+  TokenType.SPACE: :4:36
+  TokenType.KEYWORD:вывод:4:41
+  TokenType.SPACE: :4:42
+  TokenType.DEF_ARG:$a$:4:45
+  TokenType.PUNCTUATION:,:4:46
+  TokenType.SPACE: :4:47
+  TokenType.DEF_ARG:$b$:4:50
+  TokenType.PUNCTUATION:,:4:51
+  TokenType.SPACE: :4:52
+  TokenType.DEF_ARG:$c$:4:55
+  TokenType.PUNCTUATION:,:4:56
+  TokenType.SPACE: :4:57
+  TokenType.ID:нс:4:59
   TokenType.NEWLINE:
-  :4:19
-  TokenType.KEYWORD:вывод:5:5
-  TokenType.SPACE: :5:6
-  TokenType.STRING:"Привет, КуМир-Композитор!":5:33
-  TokenType.PUNCTUATION:,:5:34
-  TokenType.SPACE: :5:35
-  TokenType.ID:нс:5:37
+  :4:60
+  TokenType.IFDEF:|| еслизад:5:10
+  TokenType.SPACE: :5:11
+  TokenType.ID:ОТЛАДКА:5:18
   TokenType.NEWLINE:
-  :5:38
-  TokenType.ENDIF:|| конецесли:6:12
+  :5:19
+  TokenType.KEYWORD:вывод:6:5
+  TokenType.SPACE: :6:6
+  TokenType.STRING:"Привет, КуМир-Композитор!":6:33
+  TokenType.PUNCTUATION:,:6:34
+  TokenType.SPACE: :6:35
+  TokenType.ID:нс:6:37
   TokenType.NEWLINE:
-  :6:13
-  TokenType.IFNDEF:|| еслинезад:7:12
-  TokenType.SPACE: :7:13
-  TokenType.ID:ПРОДАКШН:7:21
+  :6:38
+  TokenType.ID:НАПЕЧАТАТЬ:7:10
+  TokenType.PUNCTUATION:(:7:11
+  TokenType.STRING:"а":7:14
+  TokenType.PUNCTUATION:,:7:15
+  TokenType.SPACE: :7:16
+  TokenType.STRING:"б":7:19
+  TokenType.PUNCTUATION:,:7:20
+  TokenType.SPACE: :7:21
+  TokenType.STRING:"в":7:24
+  TokenType.PUNCTUATION:):7:25
   TokenType.NEWLINE:
-  :7:22
-  TokenType.KEYWORD:лит:8:3
-  TokenType.SPACE: :8:4
-  TokenType.ID:СЕКРЕТНЫЙ КЛЮЧ:8:19
-  TokenType.SPACE: :8:20
-  TokenType.PUNCTUATION:=:8:21
-  TokenType.SPACE: :8:22
-  TokenType.STRING:"12345678":8:32
+  :7:26
+  TokenType.ENDIF:|| конецесли:8:12
   TokenType.NEWLINE:
-  :8:33
-  TokenType.ENDIF:|| конецесли:9:12
+  :8:13
+  TokenType.IFNDEF:|| еслинезад:9:12
+  TokenType.SPACE: :9:13
+  TokenType.ID:ПРОДАКШН:9:21
   TokenType.NEWLINE:
-  :9:13
-  TokenType.UNDEF:|| забыть:10:9
-  TokenType.SPACE: :10:10
-  TokenType.ID:ОТЛАДКА:10:17
+  :9:22
+  TokenType.KEYWORD:лит:10:3
+  TokenType.SPACE: :10:4
+  TokenType.ID:СЕКРЕТНЫЙ КЛЮЧ:10:19
+  TokenType.SPACE: :10:20
+  TokenType.PUNCTUATION:=:10:21
+  TokenType.SPACE: :10:22
+  TokenType.STRING:"12345678":10:32
   TokenType.NEWLINE:
-  :10:18
-  TokenType.UNDEF:|| забыть:11:9
-  TokenType.SPACE: :11:10
-  TokenType.ID:ПРОДАКШН:11:18
+  :10:33
+  TokenType.ENDIF:|| конецесли:11:12
   TokenType.NEWLINE:
-  :11:19
+  :11:13
+  TokenType.UNDEF:|| забыть:12:9
+  TokenType.SPACE: :12:10
+  TokenType.ID:ОТЛАДКА:12:17
+  TokenType.NEWLINE:
+  :12:18
+  TokenType.UNDEF:|| забыть:13:9
+  TokenType.SPACE: :13:10
+  TokenType.ID:ПРОДАКШН:13:18
+  TokenType.NEWLINE:
+  :13:19
   '''
 # ---

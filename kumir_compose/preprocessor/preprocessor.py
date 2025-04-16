@@ -32,6 +32,7 @@ class Preprocessor:
         self._filename = filename
         self._source = source
         self._macro_table: dict[str, Sequence[Token]] = {}
+        self._macro_arg_table: dict[str, Sequence[str]] = {}
         self._lookup_paths = set(lookup_paths)
         self._lookup_paths.add("")
         self._encoding = encoding
@@ -68,6 +69,16 @@ class Preprocessor:
             return self._next()
         return None
 
+    def _match_lexeme(
+            self,
+            expected: str,
+    ) -> Token | None:
+        if self._at_end:
+            return None
+        if self._peek.lexeme == expected:
+            return self._next()
+        return None
+
     def _error(self, exc_type, offset: int = 0, *args, **kwargs):
         kwargs["source"] = self._source
         kwargs["filename"] = self._filename
@@ -87,6 +98,22 @@ class Preprocessor:
             self._error(
                 UnexpectedTokenException,
                 expected=expected_type,
+                got=self._peek,
+                message=message,
+            )
+        return token
+
+    def _require_lexeme(
+            self,
+            expected_lexeme: str,
+            *,
+            message: str | None = None,
+    ) -> Token:
+        token = self._match_lexeme(expected_lexeme)
+        if token is None:
+            self._error(
+                UnexpectedTokenException,
+                expected=expected_lexeme,
                 got=self._peek,
                 message=message,
             )
@@ -134,6 +161,17 @@ class Preprocessor:
             self._match(TokenType.NEWLINE)
             self._macro_table[macro_name.value] = []
             return
+        args = None
+        if self._peek and self._peek.lexeme == "(":
+            self._next()
+            args = []
+            while True:
+                self._consume_spaces()
+                args.append(self._require(TokenType.DEF_ARG).lexeme)
+                self._consume_spaces()
+                if not self._match_lexeme(","):
+                    break
+            self._require_lexeme(")")
         esc = False
         macro_values = []
         while self._peek:
@@ -148,10 +186,13 @@ class Preprocessor:
             else:
                 macro_values.append(self._next())
         self._macro_table[macro_name.value] = macro_values
+        self._macro_arg_table[macro_name.value] = args
 
     def _undef_macro(self) -> None:
         self._consume_spaces()
         macro_name = self._require(TokenType.ID)
+        if macro_name.value in self._macro_table:
+            self._macro_table.pop(macro_name.value)
         if macro_name.value in self._macro_table:
             self._macro_table.pop(macro_name.value)
 
@@ -208,8 +249,42 @@ class Preprocessor:
         return True
 
     def _process_id(self, token: Token) -> Token:
-        if token.lexeme in self._macro_table:
+        if (
+                token.lexeme in self._macro_table and
+                not self._macro_arg_table.get(token.lexeme)
+        ):
             first_token, *other_tokens = self._macro_table[token.lexeme]
+            self._tokens[self._pos - 1] = first_token
+            self._insert_tokens_here(other_tokens)
+            return first_token
+        if (
+                token.lexeme in self._macro_table and
+                self._macro_arg_table.get(token.lexeme)
+        ):
+            self._consume_spaces()
+            self._require_lexeme("(")
+            substitute = {}
+            for arg in self._macro_arg_table[token.lexeme]:
+                self._consume_spaces()
+                tokens = []
+                while self._peek and self._peek.lexeme not in ",)":
+                    tokens.append(self._next())
+                substitute[arg] = tokens
+                if self._peek.lexeme == ")":
+                    break
+                self._require_lexeme(",")
+            self._require_lexeme(")")
+            tokens = self._macro_table[token.lexeme]
+            substituted_tokens = []
+            for token in tokens:
+                if (
+                        token.type == TokenType.DEF_ARG and
+                        token.lexeme in substitute
+                ):
+                    substituted_tokens.extend(substitute[token.lexeme])
+                else:
+                    substituted_tokens.append(token)
+            first_token, *other_tokens = substituted_tokens
             self._tokens[self._pos - 1] = first_token
             self._insert_tokens_here(other_tokens)
             return first_token

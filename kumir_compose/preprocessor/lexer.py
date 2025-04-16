@@ -110,6 +110,8 @@ class Lexer:
                     self._scan_directive()
                 else:
                     self._scan_comment()
+            case "$":
+                self._scan_def_arg()
             case _:
                 if ch in PUNCTUATION_CHARS:
                     self._add_token(TokenType.PUNCTUATION)
@@ -187,6 +189,16 @@ class Lexer:
                 last_space = self._pos
             self._consume()
         self._add_token(TokenType.ID)
+
+    def _scan_def_arg(self) -> None:
+        while (
+                self._peek and
+                self._peek in VALID_ID_CHARS and
+                self._peek != "$"
+        ):
+            self._consume()
+        self._require("$")
+        self._add_token(TokenType.DEF_ARG)
 
 
 def _count_trailing_whitespaces(text: str) -> int:  # pragma: no cover

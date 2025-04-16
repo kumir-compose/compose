@@ -25,6 +25,7 @@ class TokenType(enum.Enum):
     ENDIF = enum.auto()
     UNDEF = enum.auto()
     INCLUDE = enum.auto()
+    DEF_ARG = enum.auto()
 
 
 @frozen

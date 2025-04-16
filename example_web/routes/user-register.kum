@@ -10,7 +10,7 @@
     валидация_извлечь_поле(данные, "password", пароль)
     валидация_строка_длина(логин, 4, -1)
     валидация_строка_длина(пароль, 8, -1)
-    валидация_строка_из(логин, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-")
+    |валидация_строка_из(логин, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-")
 штанго_конец_валидации
 
 лит ответ
@@ -26,5 +26,3 @@
 
 || включить "shtango/core"
 || включить "shtango/validation"
-|| включить "shtango/psql"
-|| включить "db"
