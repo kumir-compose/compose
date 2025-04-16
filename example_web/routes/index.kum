@@ -1,0 +1,9 @@
+|| включить "shtango/macros"
+
+алг нач
+штанго_контроллер
+штанго_ответ_шаблоном("200", "templates/index.html", новыйОбъект)
+кон
+
+|| включить "shtango/core"
+|| включить "shtango/templating"

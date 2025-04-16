@@ -85,7 +85,9 @@ class KSPIBasedHandler(BaseRequestHandler):
             stdout=subprocess.PIPE,
             stderr=sys.stderr,
             stdin=subprocess.PIPE,
-            text=True
+            text=True,
+            encoding="UTF-8-sig",
+            errors="ignore"
         )
         self.kspi.connect(proc.stdout, proc.stdin)
         self.kspi.send(

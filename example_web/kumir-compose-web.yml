@@ -1,3 +1,5 @@
 routes:
   GET /ping: ping
-  POST /ping: ping
+  GET /: index
+  GET /register: user-register
+  POST /register: user-register

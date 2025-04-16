@@ -1,0 +1,12 @@
+project:
+  name: Test Kumir Project
+  depends:
+    k-collections: latest
+    k-json: latest
+
+
+settings:
+  sdk:
+    compiler: 'C:\\\\\\\\Program Files (x86)\\\\\\\\Kumir-2.1.0-rc11\\\\\\\\bin\\\\\\\\kumir2-bc.exe'
+    release: 'C:\\\\\\\\Program Files (x86)\\\\\\\\Kumir-2.1.0-rc11\\\\\\\\bin\\\\\\\\kumir2-xrun.exe'
+    debug: 'C:\\\\\\\\Program Files (x86)\\\\\\\\Kumir-2.1.0-rc11\\\\\\\\bin\\\\\\\\kumir2-xrun.exe'

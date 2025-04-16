@@ -1,3 +1,0 @@
-|| задать print($text$, $text2$, $text3$) вывод $text$, $text2$, $text3$, нс
-
-print("Привет", "fd", text2)
