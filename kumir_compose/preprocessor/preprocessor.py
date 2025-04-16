@@ -1,4 +1,5 @@
 from collections.abc import Collection, Sequence
+from operator import attrgetter
 from pathlib import Path
 
 from attrs import frozen
@@ -282,6 +283,14 @@ class Preprocessor:
                         token.lexeme in substitute
                 ):
                     substituted_tokens.extend(substitute[token.lexeme])
+                elif token.type in (TokenType.COMMENT, TokenType.STRING):
+                    substituted_tokens.append(Token(
+                        type=token.type,
+                        char=token.char,
+                        line=token.line,
+                        value=_replace_vars_in_str(token.value, substitute),
+                        lexeme=_replace_vars_in_str(token.lexeme, substitute),
+                    ))
                 else:
                     substituted_tokens.append(token)
             first_token, *other_tokens = substituted_tokens
@@ -289,3 +298,14 @@ class Preprocessor:
             self._insert_tokens_here(other_tokens)
             return first_token
         return token
+
+
+def _replace_vars_in_str(
+        text: str, variables: dict[str, Sequence[Token]]
+) -> str:
+    for var_name, var_value in variables.items():
+        text = text.replace(
+            f"${var_name}$",
+            "".join(map(attrgetter("lexeme"), var_value))
+        )
+    return text
