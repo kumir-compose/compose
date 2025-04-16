@@ -1,13 +1,13 @@
 [project]
 name = "kumir-compose"
-version = "0.1.0"
+version = "0.2"
 description = "Kumir preprocessing, package management and debugging tool"
 authors = [
     {name = "Tapeline",email = "yt.redstone.mail@gmail.com"}
 ]
 license = {text = "GNU GPL v3.0"}
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "attrs (>=25.3.0,<26.0.0)",
     "click (>=8.1.8,<9.0.0)",
@@ -17,8 +17,6 @@ dependencies = [
     "requests (>=2.32.3,<3.0.0)",
     "alive-progress (>=3.2.0,<4.0.0)",
     "psycopg2-binary (>=2.9.10,<3.0.0)",
-    "uvicorn (>=0.34.0,<0.35.0)",
-    "gunicorn (>=23.0.0,<24.0.0)",
     "waitress (>=3.0.2,<4.0.0)",
 ]
 

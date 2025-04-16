@@ -9,6 +9,12 @@ Install a Kumir SDK first ([niisi.ru](https://www.niisi.ru/kumir/dl)).
 This project was tested only on Windows. It should
 work on other systems too, but it's not guaranteed.
 
+## Installation
+```sh
+pip install kumir-compose
+# requires python 3.12+
+```
+
 ## Usage
 Create a Kumir-Compose project:
 ```sh
